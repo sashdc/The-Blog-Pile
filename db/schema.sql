@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS blogpile_db;
+CREATE DATABASE blogpile_db;
