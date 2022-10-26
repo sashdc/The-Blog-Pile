@@ -2,3 +2,7 @@
     list-style: none;
     text-decoration: none;
 }
+
+.jumbotron {
+    padding: 2rem 1rem;
+}

@@ -17,15 +17,15 @@
   <div class="container">
     <h1 class="display-4">The Blogpile</h1>
     <p class="lead">A place to share and find thoughts and ideas of all things tech.</p>
-  </div>
-<nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <button class="no-button" id="logout">logout</button>
+           
+     {{#if logged_in}}
+        <a href="/dashboard">Dashboard</a>
+        <a href="/">logout {{user.name}}</a>
         {{else}}
         <a href="/login">login</a>
         {{/if}}
-      </nav>
+  </div>
+
 </div>
     <main class="container container-fluid mt-5">
       <!-- Render the sub layout -->
