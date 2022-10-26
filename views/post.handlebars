@@ -1,0 +1,26 @@
+<section style="background-color: #f7f6f6;">
+
+<a href="/" class="go-back"> &larr; Back </a>
+<br>
+<br>
+
+{{> post-content post}}
+
+{{#if loggedIn}}
+<form class="comment-form">
+    <div>
+        <textarea name="comment-body"></textarea>
+    </div>
+
+    <div>
+        <button type="submit">add comment</button>
+    </div>
+</form>
+{{/if}}
+
+{{> comment post.comments}}
+
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{/if}}
+</section>
