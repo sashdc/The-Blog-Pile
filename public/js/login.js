@@ -1,3 +1,5 @@
+
+// manages log in form
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -22,28 +24,29 @@ const loginFormHandler = async (event) => {
   }
 };
 
+// manages sign up form
 const signupFormHandler = async (event) => {
+    
   event.preventDefault();
 
-  const name = document.querySelector('#name-signup').value.trim();
+  const username = document.querySelector('#name-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
-  console.log(name)
-  console.log(password)
 
-  if (name && password) {
-    const response = await fetch('/api/users', {
+  if (username && email && password) {
+    const response = await fetch('/api/user/signup', {
       method: 'POST',
-      body: JSON.stringify({ name, password }),
+      body: JSON.stringify({ username, email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
       document.location.replace('/');
     } else {
-      alert(response.statusText);
+      alert('Something went wrong, please try again');
     }
   }
 };
+
 
 document
   .querySelector('.login-form')

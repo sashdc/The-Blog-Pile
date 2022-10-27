@@ -18,7 +18,7 @@
     <h1 class="display-4"><a href="/"><b>The Blogpile</b></a></h1>
     <p class="lead">A place to share and find thoughts and ideas of all things tech.</p>
            
-     {{#if logged_in}}
+     {{#if loggedIn}}
         <a href="/dashboard">Dashboard</a>
         <a href="/">logout {{user.name}}</a>
         {{else}}
@@ -37,7 +37,7 @@
   </div>
 
   <!-- Render script for logged in users only -->
-  {{#if logged_in}}
+  {{#if loggedIn}}
   <script src="/js/logout.js"></script>
   {{/if}}
 </body>
