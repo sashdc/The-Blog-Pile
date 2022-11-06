@@ -1,15 +1,4 @@
-{{!-- <div class="comments">
-    {{#each this}}
-    <section class="comment mt-3 ">
-        <div class="meta">
-           <i>comment by {{user.name}} on {{format_date createdAt}}</i>
-        </div>
-        <div class="text">
-            {{comment_text}}
-        </div>
-    </section>
-    {{/each}}
-</div> --}}
+
 
   <div class="container my-1 py-1 text-dark">
     <div class="row d-flex justify-content-center">
@@ -26,7 +15,7 @@
               <div class="w-100">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h6 class="text-primary fw-bold mb-0">
-                   <b> {{user.name}}</b>
+                   <b> {{user.username}}</b>
                     <span class="text justify-content-between ms-2"><i>{{comment_text}}</i></span>
                   </h6>
                   <p class="mb-0">{{format_date createdAt}}</p>

@@ -1,57 +1,50 @@
-
 // manages log in form
 const loginFormHandler = async (event) => {
   event.preventDefault();
-
-  // Collect values from the login form
-  const user = document.querySelector('#user-login').value.trim();
+console.log('trying to log in')
+  const username = document.querySelector('#username-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
-  if (user && password) {
-    // Send a POST request to the API endpoint
-    const response = await fetch('/api/users/login', {
+  if (username && password ) {
+    const response = await fetch('/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({ user, password }),
+      body: JSON.stringify({ username, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
       document.location.replace('/');
     } else {
-      alert(response.statusText);
+      alert('Incorrect email or password. Please try again!');
     }
   }
 };
-
 // manages sign up form
 const signupFormHandler = async (event) => {
-    
   event.preventDefault();
 
-  const username = document.querySelector('#name-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
+  const username = document.querySelector("#name-signup").value.trim();
+  const password = document.querySelector("#password-signup").value.trim();
 
-  if (username && email && password) {
-    const response = await fetch('/api/user/signup', {
-      method: 'POST',
-      body: JSON.stringify({ username, email, password }),
-      headers: { 'Content-Type': 'application/json' },
+  if (username && password) {
+    const response = await fetch("/api/user/signup", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+      headers: { "Content-Type": "application/json" },
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace("/");
     } else {
-      alert('Something went wrong, please try again');
+      alert("Something went wrong, please try again");
     }
   }
 };
 
+document
+  .querySelector(".login-form")
+  .addEventListener("submit", loginFormHandler);
 
 document
-  .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
-
-document
-  .querySelector('.signup-form')
-  .addEventListener('submit', signupFormHandler);
+  .querySelector(".signup-form")
+  .addEventListener("submit", signupFormHandler);
