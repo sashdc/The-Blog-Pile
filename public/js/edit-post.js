@@ -4,7 +4,7 @@ async function editFormHandler(event) {
 
     const post_title = document.querySelector('#post-title').value;
     const post_content = document.querySelector('#post-content').value.trim();
-    const post_id = req.session.post_id;
+    const post_id = document.querySelector('#post-id').value;
 
     const response = await fetch(`/api/posts/${post_id}`, {
         method: 'PUT',
