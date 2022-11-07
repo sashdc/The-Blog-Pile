@@ -1,0 +1,16 @@
+<form>
+  <div class="form-group edit-post-form'">
+    <label for="Title">Post Title </label>
+    
+    <input type="text" class="form-control" id="post-title"  value="{{post.post_title}}">
+    </div>
+   <div class="form-group">
+    <label for="blogpost">Edit your post below:</label>
+    <textarea class="form-control" id="post-content" rows="8">
+    {{post.post_content}}
+   </textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary edit-post" id="edit-post">Submit</button>
+</form>
+<script src="/js/edit-post.js"></script>

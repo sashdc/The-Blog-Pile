@@ -31,6 +31,7 @@ router.get("/", (req, res) => {
 
 // Create a post when logged in
 router.post("/", withAuth, (req, res) => {
+  console.log('trying to create post')
   Post.create({
     post_title: req.body.title,
     post_content: req.body.post_content,
@@ -43,48 +44,29 @@ router.post("/", withAuth, (req, res) => {
     });
 });
 
-// grab single post by id
-router.get("/:id", (req, res) => {
-  Post.findOne({
-    where: {
-      id: req.params.id,
-    },
-    attributes: ["id", "post_content", "post_title", "createdAt"],
-    include: [
-      {
-        model: User,
-        attributes: ["username"],
-      },
-      {
-        model: Comment,
-        attributes: ["id", "comment_text", "post_id", "user_id", "createdAt"],
-        include: {
-          model: User,
-          attributes: ["username"],
-        },
-      },
-    ],
-  })
-    .then((dbPostData) => {
-      if (!dbPostData) {
-        res.status(404).json({
-          message: "No post found with this id, please try again",
-        });
-        return;
-      }
-      res.json(dbPostData);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
+// get a post to edit
+router.get("/editpost", withAuth, async (req, res) => {
+  const dbPostData = await Post.findAll({ where: { id: req.session.post_id } });
 
+  const posts = dbPostData.map((post) => post.get({ plain: true }));
+  post = posts[0];
+  console.log(post);
+  // console.log(post[0].post_title)
+  res.render("editpost", {
+    post,
+    loggedIn: req.session.loggedIn,
+    user_id: req.session.user_id,
+    post_id: req.session.post_id,
+
+  });
+});
 
 // Edit a post
 router.put("/:id", withAuth, (req, res) => {
+  console.log('trying to edit post')
+
   Post.update({
-          post_title: req.body.title,
+          post_title: req.body.post_title,
           post_content: req.body.post_content,
       }, {
           where: {
@@ -127,5 +109,11 @@ router.delete("/:id", withAuth, (req, res) => {
           res.status(500).json(err);
       });
 });
+
+
+router.get('/newpost', withAuth, async(req,res) => {
+  res.render('newpost', {loggedIn: req.session.loggedIn, user_id: req.session.user_id})
+})
+module.exports = router
 
   module.exports = router;
