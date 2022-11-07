@@ -1,17 +1,16 @@
 <form>
-    <div class="form-row">
- <div class="form-group edit-post-form'">
-    <label for="Title">Post Title </label>
-        <input type="text" class="form-control col-md-7" id="post-title" value="{{post.post_title}}">
-        </div>
-        <div class="form-group post-id">
-        <label for="Title">Post ID </label>
-    
-    <input type="text" readonly class="form-control col-md-3" id="post-id" value="{{post.id}}">
+  <div class="form-row">
+    <div class="form-group edit-post-form col-md-10">
+      <label for="Title">Post Title</label>
+      <input type="text" class="form-control" id="post-title" value="{{post.post_title}}">
     </div>
+    <div class="form-group post-id col-md-2">
+      <label for="Title">Post ID </label>
+      <input type="text" readonly class="form-control " id="post-id" value="{{post.id}}">
     </div>
-    
-   <div class="form-group">
+  </div>
+
+  <div class="form-group">
     <label for="blogpost">Edit your post below:</label>
     <textarea class="form-control" id="post-content" rows="8">
     {{post.post_content}}
