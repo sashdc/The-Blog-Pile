@@ -1,8 +1,8 @@
-const direct = (event) => {
+const newPostForm = (event) => {
     event.preventDefault();
     document.location.replace('/newpost')
 }
 
 
 
-document.querySelector('#new-post').addEventListener('click', direct)
+document.querySelector('#new-post').addEventListener('click', newPostForm)

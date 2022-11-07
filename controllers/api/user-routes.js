@@ -2,60 +2,59 @@ const router = require("express").Router();
 const { User } = require("../../models");
 
 // create a user/password
-router.post('/signup', (req, res) => {
+router.post("/signup", (req, res) => {
   User.create({
-          username: req.body.username,
-          password: req.body.password
-      })
-      .then(dbUserData => {
-          req.session.save(() => {
-              req.session.user_id = dbUserData.id;
-              req.session.username = dbUserData.username;
-              req.session.loggedIn = true;
-
-              res.json(dbUserData);
-          });
-      })
-      .catch(err => {
-          console.log(err);
-          res.status(500).json(err);
-      });
-})
-
-// log in 
-router.post("/login", async (req, res) => {
-  console.log('trying to log in')
-    try {
-      const dbUserData = await User.findOne({
-        where: {
-          username: req.body.username,
-        },
-      });
-      if (!dbUserData) {
-        res
-          .status(400)
-          .json({ message: "Incorrect username. Please try again!" });
-        return;
-      }
-      const validPassword = dbUserData.checkPassword(req.body.password);
-      if (!validPassword) {
-        res
-          .status(400)
-          .json({ message: "Incorrect password. Please try again!" });
-        return;
-      }
+    username: req.body.username,
+    password: req.body.password,
+  })
+    .then((dbUserData) => {
       req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
         req.session.loggedIn = true;
-        req.session.user_id = dbUserData.dataValues.id;
-        res
-          .status(200)
-          .json({ user: dbUserData, message: "You are now logged in!" });
+
+        res.json(dbUserData);
       });
-    } catch (err) {
+    })
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
+    });
+});
+
+// log in
+router.post("/login", async (req, res) => {
+  try {
+    const dbUserData = await User.findOne({
+      where: {
+        username: req.body.username,
+      },
+    });
+    if (!dbUserData) {
+      res
+        .status(400)
+        .json({ message: "Incorrect username. Please try again!" });
+      return;
     }
-  });
+    const validPassword = dbUserData.checkPassword(req.body.password);
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: "Incorrect password. Please try again!" });
+      return;
+    }
+    req.session.save(() => {
+      req.session.loggedIn = true;
+      req.session.user_id = dbUserData.dataValues.id;
+      res
+        .status(200)
+        .json({ user: dbUserData, message: "You are now logged in!" });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // log out and end session
 router.post("/logout", (req, res) => {
@@ -67,6 +66,5 @@ router.post("/logout", (req, res) => {
     res.status(404).end();
   }
 });
-
 
 module.exports = router;

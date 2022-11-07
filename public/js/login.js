@@ -1,21 +1,20 @@
 // manages log in form
 const loginFormHandler = async (event) => {
   event.preventDefault();
-console.log('trying to log in')
-  const username = document.querySelector('#username-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
+  const username = document.querySelector("#username-login").value.trim();
+  const password = document.querySelector("#password-login").value.trim();
 
-  if (username && password ) {
-    const response = await fetch('/api/user/login', {
-      method: 'POST',
+  if (username && password) {
+    const response = await fetch("/api/user/login", {
+      method: "POST",
       body: JSON.stringify({ username, password }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace("/");
     } else {
-      alert('Incorrect email or password. Please try again!');
+      alert("Incorrect email or password. Please try again!");
     }
   }
 };

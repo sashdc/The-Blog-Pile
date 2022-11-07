@@ -15,10 +15,8 @@ router.get("/", async (req, res) => {
         },
       ],
     });
-    console.log(postData);
     // Serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
-    console.log(posts);
     // Pass serialized data and session flag into template
     res.render("homepage", {
       posts,
@@ -73,8 +71,8 @@ router.get("/post/:id", (req, res) => {
 
       req.session.save(() => {
         req.session.post_id = req.params.id;
-        console.log(req.session.user_id)
-        console.log(post.user_id)
+        console.log(req.session.user_id);
+        console.log(post.user_id);
 
         if (post.user_id === req.session.user_id) {
           res.render("user-posts", {
@@ -91,11 +89,6 @@ router.get("/post/:id", (req, res) => {
             post_id: req.session.post_id,
           });
         }
-console.log(post)
-        // res.render("post", {
-        //   post,
-        //   loggedIn: req.session.loggedIn,
-        // });
       });
     })
     .catch((err) => {
@@ -104,7 +97,7 @@ console.log(post)
     });
 });
 
-// add a post when logged in
+// add a post when logged in - open up newpost page with form
 router.get("/newpost", withAuth, (req, res) => {
   res.render("newpost", {
     loggedIn: req.session.loggedIn,

@@ -13,8 +13,7 @@ router.get("/", (req, res) => {
 });
 
 //Create a comment when logged in
-router.post("/", withAuth,  (req, res) => {
-  console.log('trying to post comment')
+router.post("/", withAuth, (req, res) => {
   if (req.session) {
     Comment.create({
       comment_text: req.body.comment_text,
