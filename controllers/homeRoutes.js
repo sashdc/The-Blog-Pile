@@ -38,7 +38,7 @@ router.get("/login", (req, res) => {
 });
 
 // load a page fr an individual post
-router.get("/post/:id", (req, res) => {
+router.get("/post/:id", withAuth,(req, res) => {
   Post.findOne({
     where: {
       id: req.params.id,
